@@ -23,6 +23,11 @@ Every entry's spine, no matter the `kind`:
 3. **The Catch** (`theCatch`) — the signature move. The honest caveat a rating
    can't hold. This is the feature; treat it as first-class, not an afterthought.
 4. **The proof** — photos (`public/photos/`), or an honest placeholder slot.
+   **Before an entry's photos go public, check/strip EXIF GPS** — phone photos can
+   embed exact lat/long that undoes the whole rounded-`driveKm` privacy design,
+   and once pushed to the public repo it's in git history. The check must precede
+   the publish, not follow it. (Entry #001's shots came back clean — no real
+   coordinates — but that was luck: they were published before the check.)
 
 Food is **one flavour** (`kind: 'food'` adds `price` / `getThe`). Never rebuild
 the model around food — a lake is a first-class entry.
@@ -50,8 +55,10 @@ reintroduces the exact backlog-rot the design avoids.
 ## Stack
 
 React 19 · Vite 6 · TypeScript strict · Tailwind v3 · react-router-dom (HashRouter,
-so static hosting needs no rewrite). Same stack as MEE — this can fold into MEE's
-Food Road Trip Mode with no migration.
+so static hosting needs no rewrite). Same stack as MEE **by design**, so a later
+fold into MEE's Food Road Trip Mode is a stack-compatible lift — but that fold
+has NOT been designed or checked against MEE's actual structure. Don't state it
+as a done deal; it's the reason the stack was chosen, not a validated path.
 
 **Deploy: Vercel** (auto-deploys on push to `main`, serves from the root domain →
 `vite base '/'`). GitHub Pages was the first target but got dropped — its project

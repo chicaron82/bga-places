@@ -22,8 +22,10 @@ Only two things need your hands on each entry:
 ## Stack
 
 React 19 · Vite 6 · TypeScript (strict) · Tailwind v3 · HashRouter — the same
-house stack as MEE, so this can fold into MEE's Food Road Trip Mode later with
-no migration.
+house stack as MEE by design, so a later fold into MEE's Food Road Trip Mode is
+a stack-compatible lift rather than a rewrite. (That fold hasn't been designed
+or validated against MEE's actual structure yet — the stack match is the intent,
+not a proven no-op.)
 
 ```bash
 npm install
