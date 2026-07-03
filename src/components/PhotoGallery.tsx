@@ -3,6 +3,7 @@ import { X, ChevronLeft, ChevronRight, Expand } from 'lucide-react'
 import type { PlacePhoto } from '../types'
 import { PhotoSlot } from './PhotoSlot'
 import { assetUrl } from '../lib/asset'
+import { nextPhotoIndex } from '../lib/gallery'
 
 // Bougie or bust: a hero shot + a thumb grid, both opening a full-screen
 // lightbox with caption, keyboard nav, and next/prev. Self-contained — no
@@ -17,16 +18,7 @@ export function PhotoGallery({ photos }: { photos: PlacePhoto[] }) {
 
   const step = useCallback(
     (dir: 1 | -1) =>
-      setOpenAt((cur) => {
-        if (cur === null) return cur
-        const n = photos.length
-        // walk to the next photo that actually has an image
-        for (let k = 1; k <= n; k++) {
-          const i = (cur + dir * k + n * k) % n
-          if (photos[i]?.src) return i
-        }
-        return cur
-      }),
+      setOpenAt((cur) => (cur === null ? cur : nextPhotoIndex(photos, cur, dir))),
     [photos],
   )
 
