@@ -1,11 +1,12 @@
 import { ImageIcon } from 'lucide-react'
 import type { PlacePhoto } from '../types'
+import { assetUrl } from '../lib/asset'
 
 // A real photo when there's a src; otherwise a labelled placeholder that says,
 // honestly, "a shot goes here" — never a broken image, never a fake stock photo.
 export function PhotoSlot({ photo, className }: { photo: PlacePhoto; className?: string }) {
   if (photo.src) {
-    return <img src={photo.src} alt={photo.alt} className={className} loading="lazy" />
+    return <img src={assetUrl(photo.src)} alt={photo.alt} className={className} loading="lazy" />
   }
   return (
     <div

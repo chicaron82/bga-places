@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import { ArrowLeft, MapPin, Car, CalendarDays, TriangleAlert, Utensils, Check, Share2 } from 'lucide-react'
 import { getPlace } from '../places'
 import { BGAStamp } from '../components/BGAStamp'
-import { PhotoSlot } from '../components/PhotoSlot'
+import { PhotoGallery } from '../components/PhotoGallery'
 import { VERDICT_META } from '../lib/verdict'
 import { driveLine, visitLine, kindLabel } from '../lib/format'
 
@@ -53,7 +53,6 @@ export function PlacePage() {
   }
 
   const verdict = VERDICT_META[place.verdict]
-  const [hero, ...rest] = place.photos
 
   return (
     <main className="mx-auto max-w-3xl px-5 py-8 sm:py-12">
@@ -61,9 +60,9 @@ export function PlacePage() {
         <ArrowLeft className="h-4 w-4" /> All places
       </Link>
 
-      {hero && (
-        <PhotoSlot photo={hero} className="mt-4 aspect-[16/9] w-full rounded-2xl object-cover" />
-      )}
+      <div className="mt-4">
+        <PhotoGallery photos={place.photos} />
+      </div>
 
       <div className="mt-6 flex flex-wrap items-center gap-3">
         <span className="text-xs font-medium uppercase tracking-wide text-stone-400">
@@ -115,14 +114,6 @@ export function PlacePage() {
             <p key={i} className="mt-2 text-[15px] leading-relaxed text-amber-900/90">
               {para}
             </p>
-          ))}
-        </section>
-      )}
-
-      {rest.length > 0 && (
-        <section className="mt-8 grid gap-4 sm:grid-cols-2">
-          {rest.map((photo, i) => (
-            <PhotoSlot key={i} photo={photo} className="aspect-[4/3] w-full rounded-xl object-cover" />
           ))}
         </section>
       )}
