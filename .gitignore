@@ -20,3 +20,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+
+# full-res photo originals (optimized into public/photos via npm run optimize:photos)
+photos-src/

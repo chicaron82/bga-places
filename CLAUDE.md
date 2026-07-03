@@ -22,12 +22,15 @@ Every entry's spine, no matter the `kind`:
    point. Privacy first: "drove 450 km", never a from-home map or exact address.
 3. **The Catch** (`theCatch`) — the signature move. The honest caveat a rating
    can't hold. This is the feature; treat it as first-class, not an afterthought.
-4. **The proof** — photos (`public/photos/`), or an honest placeholder slot.
-   **Before an entry's photos go public, check/strip EXIF GPS** — phone photos can
-   embed exact lat/long that undoes the whole rounded-`driveKm` privacy design,
-   and once pushed to the public repo it's in git history. The check must precede
-   the publish, not follow it. (Entry #001's shots came back clean — no real
-   coordinates — but that was luck: they were published before the check.)
+4. **The proof** — photos, or an honest placeholder slot. **EXIF GPS must never
+   reach the public repo** — phone photos can embed exact lat/long that undoes the
+   whole rounded-`driveKm` privacy design, and once pushed it's in git history.
+   **This is now automated:** full-res originals go in `photos-src/` (gitignored);
+   `npm run optimize:photos` (sharp) resizes to ≤2000px, compresses, and strips ALL
+   metadata including GPS into `public/photos/` (committed + served). Run it locally
+   and commit the `public/photos/` output before pushing — the squeeze IS the
+   EXIF-strip. Do NOT put raw phone photos straight into `public/photos/`; they'd
+   carry metadata AND be ~10× too heavy (entry #001 was 12.8 MB → 1.46 MB).
 
 Food is **one flavour** (`kind: 'food'` adds `price` / `getThe`). Never rebuild
 the model around food — a lake is a first-class entry.

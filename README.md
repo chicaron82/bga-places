@@ -17,7 +17,22 @@ The home list and its shareable page at `/#/place/<slug>` appear automatically.
 
 Only two things need your hands on each entry:
 - `driveKm` — your **rounded** distance (it generalises where you started; keep it blunt)
-- real photos in `public/photos/`, pointed at by `photos[].src` (empty `src` renders an honest placeholder)
+- photos (see below), pointed at by `photos[].src` (empty `src` renders an honest placeholder)
+
+## Photos
+
+Drop full-res originals into `photos-src/` (gitignored — your archive stays local
+and untouched), then:
+
+```bash
+npm run optimize:photos
+```
+
+This resizes to ≤2000px, compresses (mozjpeg ~78%), and **strips all metadata —
+including GPS** — writing web-ready JPEGs into `public/photos/` (committed +
+served). Point `photos[].src` at `/photos/<name>.jpg` and commit the output.
+The squeeze *is* the EXIF-strip, so location metadata never reaches the public
+repo. (Entry #001: 12.8 MB → 1.46 MB, −89%.)
 
 ## Stack
 
