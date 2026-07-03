@@ -2,11 +2,11 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 // https://vite.dev/config/
-// HashRouter means static hosting needs no rewrite — every entry is shareable
-// at <base>#/place/<slug>. On a GitHub Pages PROJECT page the site lives under
-// /bga-places/, so assets need that base in the build; dev stays at root.
-// (If this ever moves to a custom domain, set base back to '/'.)
-export default defineConfig(({ command }) => ({
+// Deployed on Vercel, which serves from the root domain — so base is '/'.
+// HashRouter means no SPA rewrite is needed either: every entry is shareable
+// at <domain>/#/place/<slug>. (assetUrl() resolves public photos against
+// BASE_URL, so it follows this automatically.)
+export default defineConfig({
   plugins: [react()],
-  base: command === 'build' ? '/bga-places/' : '/',
-}))
+  base: '/',
+})

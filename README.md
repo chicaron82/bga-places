@@ -30,3 +30,9 @@ npm install
 npm run dev      # local preview
 npm run build    # tsc -b && vite build — the real type gate
 ```
+
+## Deploy
+
+Hosted on **Vercel** (auto-deploys on push to `main`). Vercel serves from the
+root domain, so `vite base` is `'/'` and HashRouter needs no rewrite rules — no
+`vercel.json` required. Every entry stays shareable at `<domain>/#/place/<slug>`.

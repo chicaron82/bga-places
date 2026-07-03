@@ -52,3 +52,10 @@ reintroduces the exact backlog-rot the design avoids.
 React 19 · Vite 6 · TypeScript strict · Tailwind v3 · react-router-dom (HashRouter,
 so static hosting needs no rewrite). Same stack as MEE — this can fold into MEE's
 Food Road Trip Mode with no migration.
+
+**Deploy: Vercel** (auto-deploys on push to `main`, serves from the root domain →
+`vite base '/'`). GitHub Pages was the first target but got dropped — its project
+subpath needed `base '/bga-places/'` and re-running its workflow collided on
+duplicate `github-pages` artifacts. Vercel sidesteps both. `assetUrl()` in
+`src/lib/asset.ts` resolves public photos against `BASE_URL`, so it follows the
+base automatically if the deploy target ever changes again.
